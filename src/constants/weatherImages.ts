@@ -1,0 +1,17 @@
+export const weatherImages: { [key: string]: any } = {
+    'partly cloudy': require('../assets/partlycloudy.png'),
+    'moderate rain': require('../assets/moderaterain.png'),
+    'patchy rain possible': require('../assets/moderaterain.png'),
+    'sunny': require('../assets/icons/sun.png'),
+    'clear': require('../assets/icons/sun.png'),
+    'overcast': require('../assets/cloud.png'),
+    'light rain': require('../assets/moderaterain.png'),
+    'moderate rain at times': require('../assets/moderaterain.png'),
+    'heavy rain': require('../assets/heavyrain.png'),
+    'heavy rain at times': require('../assets/heavyrain.png'),
+    'moderate or heavy freezing rain': require('../assets/heavyrain.png'),
+    'moderate or heavy rain shower': require('../assets/heavyrain.png'),
+    'moderate or heavy rain with thunder': require('../assets/heavyrain.png'),
+    'mist': require('../assets/mist.png'),
+    'other': require('../assets/moderaterain.png'),
+};
