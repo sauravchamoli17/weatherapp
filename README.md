@@ -1,6 +1,9 @@
 # Weather App
 A React Native application that fetches and displays weather data using the WeatherAPI.
 
+## Download the app
+[Download](https://github.com/sauravchamoli17/weatherapp/blob/main/app-release.apk)
+
 ## Installation
 
 1. **Clone the repository:**
