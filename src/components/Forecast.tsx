@@ -15,13 +15,14 @@ import { WeatherData } from '../interfaces/weatherInterfaces';
 import Error from './Error';
 import WeatherMetric from './WeatherMetric';
 import DaysModal from './DaysModal';
+import { STORE_DAYS_COUNT } from '../constants/actionTypes';
 
 const Forecast: React.FC = () => {
     const forecast = useSelector((state: RootState) => state.weather.forecast);
     const loading = useSelector((state: RootState) => state.weather.loading);
     const error = useSelector((state: RootState) => state.weather.error);
+    const dayCount = useSelector((state: RootState) => state.dayCount);
     const [offlineForecast, setOfflineForecast] = useState<any>(null);
-    const [dayCount, setDayCount] = useState(3);
 
     const retryFetchWeather = async () => {
         const location = await getCityFromAsyncStorage();
@@ -39,7 +40,7 @@ const Forecast: React.FC = () => {
             if (location) {
                 const count = days ? days : dayCount;
                 if (days) {
-                    setDayCount(days);
+                    store.dispatch({ type: STORE_DAYS_COUNT, payload: days });
                 }
                 store.dispatch(fetchWeather(location, count));
             }
@@ -89,7 +90,7 @@ const Forecast: React.FC = () => {
     const dailyForecastData = displayForecast?.forecast?.forecastday;
 
     return (
-        <View className="m-4 flex justify-around flex-1 mb-8">
+        <View className="m-4 flex justify-around flex-1">
             <AppText className="text-white text-center text-2xl">
                 {displayForecast.location.name},&nbsp;
                 <AppText className="text-lg font-semibold text-gray-300">
@@ -112,10 +113,11 @@ const Forecast: React.FC = () => {
                 <WeatherMetric icon={require('../assets/icons/drop.png')} value={displayForecast.current.humidity} unit="%" />
                 <WeatherMetric icon={require('../assets/icons/sun.png')} value={sunriseTime !== 'N/A' ? moment(sunriseTime, "h:mm A").format("hh:mm A") : 'N/A'} unit="" />
             </View>
-            <View className="mb-4 space-y-3">
-                <DaysModal dayCount={dayCount} setDayCount={setDayCount} locationName={displayForecast.location.name} />
+            <View className="space-y-3">
+                <DaysModal locationName={displayForecast.location.name} />
                 <DailyForecast forecastData={dailyForecastData} />
             </View>
+            <View className='h-8' />
         </View>
     );
 };

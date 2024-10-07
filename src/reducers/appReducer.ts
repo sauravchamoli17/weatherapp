@@ -1,7 +1,7 @@
-import { STORE_LOCATION, STORE_FORECAST, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS, FETCH_WEATHER_FAILURE } from '../constants/actionTypes';
+import { FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS, FETCH_WEATHER_FAILURE, STORE_DAYS_COUNT } from '../constants/actionTypes';
 
 interface AppState {
-  selectedLocation: any;
+  dayCount: number;
   weather: {
     loading: boolean;
     forecast: any;
@@ -10,26 +10,24 @@ interface AppState {
 }
 
 const initialState: AppState = {
-  selectedLocation: null,
   weather: {
     loading: false,
     forecast: null,
     error: null,
   },
+  dayCount: 3
 };
 
 const appReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case STORE_LOCATION:
-      return { ...state, selectedLocation: action.payload };
     case FETCH_WEATHER_REQUEST:
       return { ...state, weather: { ...state.weather, loading: true, error: null } };
     case FETCH_WEATHER_SUCCESS:
       return { ...state, weather: { loading: false, forecast: action.payload, error: null } };
     case FETCH_WEATHER_FAILURE:
       return { ...state, weather: { loading: false, forecast: null, error: action.error } };
-    case STORE_FORECAST:
-      return { ...state, weather: { ...state.weather, forecast: action.payload } };
+    case STORE_DAYS_COUNT:
+      return { ...state, dayCount: action.payload };
     default:
       return state;
   }

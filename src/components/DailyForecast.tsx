@@ -17,7 +17,7 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ forecastData }) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     return (
-        <View className="my-4 space-y-3">
+        <View className="mt-5 space-y-3">
             <ScrollView
                 horizontal
                 contentContainerStyle={{ paddingHorizontal: 8 }}

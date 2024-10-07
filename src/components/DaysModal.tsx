@@ -5,17 +5,19 @@ import AppText from './AppText';
 import ModalSelector from 'react-native-modal-selector';
 import { fetchWeather } from '../actions/weatherActions';
 import store from '../store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers/appReducer';
+import { STORE_DAYS_COUNT } from '../constants/actionTypes';
 
 interface DaysModalProps {
-    dayCount: number;
-    setDayCount: (count: number) => void;
     locationName: string;
 }
 
-const DaysModal: React.FC<DaysModalProps> = ({ dayCount, setDayCount, locationName }) => {
-    
+const DaysModal: React.FC<DaysModalProps> = ({ locationName }) => {
+    const dayCount = useSelector((state: RootState) => state.dayCount);
+
     const handleDayCountChange = (option: { key: number }) => {
-        setDayCount(option.key);
+        store.dispatch({ type: STORE_DAYS_COUNT, payload: option.key });
         store.dispatch(fetchWeather(locationName, option.key));
     };
 

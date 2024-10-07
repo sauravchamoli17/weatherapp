@@ -2,6 +2,7 @@ export const weatherImages: { [key: string]: any } = {
     'partly cloudy': require('../assets/partlycloudy.png'),
     'moderate rain': require('../assets/moderaterain.png'),
     'patchy rain possible': require('../assets/moderaterain.png'),
+    'patchy rain nearby': require('../assets/moderaterain.png'),
     'sunny': require('../assets/icons/sun.png'),
     'clear': require('../assets/icons/sun.png'),
     'overcast': require('../assets/cloud.png'),

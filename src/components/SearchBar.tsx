@@ -8,6 +8,8 @@ import AppInput from './AppInput';
 import { getWeatherLocationsByCity } from '../api/weatherApi';
 import store from '../store';
 import { fetchWeather } from '../actions/weatherActions';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers/appReducer';
 
 interface Location {
     name: string;
@@ -20,6 +22,7 @@ const SearchBar: React.FC = () => {
     const [locations, setLocations] = useState<Location[]>([]);
     const [noResults, setNoResults] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const dayCount = useSelector((state: RootState) => state.dayCount);
 
     useEffect(() => {
         const timer = setTimeout(async () => {
@@ -40,8 +43,8 @@ const SearchBar: React.FC = () => {
     const handleLocationSelect = (selectedCity: string) => {
         setCity(selectedCity);
         const locationData = locations.find(loc => loc.name === selectedCity);
-        if (locationData) { 
-            store.dispatch(fetchWeather(selectedCity, 3));
+        if (locationData) {
+            store.dispatch(fetchWeather(selectedCity, dayCount));
         }
         handleClearInput();
     };
